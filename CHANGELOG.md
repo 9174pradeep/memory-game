@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Demo** — an automatically recorded playthrough of the game
+  (`docs/demo.mp4` and `docs/demo.gif`) plus `scripts/record-demo.js`, which
+  regenerates both with headless Chrome and ffmpeg.
+- **Project overview** in the README with the project description, my role,
+  the tools and technologies used, and links to the playable game, the
+  repository and the demo.
 - **Security headers** — every response now carries `X-Content-Type-Options`,
   `X-Frame-Options`, `Referrer-Policy` and a strict `Content-Security-Policy`;
   the `X-Powered-By` header is disabled.

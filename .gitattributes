@@ -21,6 +21,9 @@
 *.mp3 binary
 *.ogg binary
 *.wav binary
+*.mp4 binary
+*.webm binary
+*.mov binary
 *.pdf binary
 *.zip binary
 

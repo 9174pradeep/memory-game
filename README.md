@@ -18,6 +18,74 @@ Three difficulties, a timer, a move counter, personal bests and an online leader
 
 ---
 
+## Project overview
+
+| | |
+| --- | --- |
+| **Project** | Memory Card Match — a full-stack card matching game with a leaderboard |
+| **Playable game** | Run `npm install && npm start`, then open <http://localhost:3000> |
+| **Repository** | <https://github.com/OWNER/memory-game> |
+| **Demo video** | [`docs/demo.mp4`](docs/demo.mp4) — 25 second screen recording of a full game (H.264, 960×600) |
+| **Demo animation** | [`docs/demo.gif`](docs/demo.gif) — the same recording as a lightweight GIF |
+| **Live demo** | <https://OWNER.github.io/memory-game/> (if published) |
+
+### Demo
+
+![Gameplay demo](docs/demo.gif)
+
+The recording shows a complete Medium game: the name and difficulty are filled
+in, all 16 cards are revealed, every pair is matched, the win screen appears
+with the score, and the score is saved to the leaderboard.
+
+> The demo is generated automatically — `npm start` in one terminal, then
+> `node scripts/record-demo.js` (needs Chrome and ffmpeg) re-records
+> `docs/demo.mp4` and `docs/demo.gif`.
+
+### What it does
+
+- Three difficulties — Easy (4×3), Medium (4×4), Hard (6×4) — with a live timer,
+  move counter, pause and restart.
+- Server-side scoring: fewer moves and less time always mean a higher score, and
+  harder difficulties are worth more.
+- An online leaderboard (top 10 per difficulty) plus per-difficulty personal
+  bests stored in the browser.
+- Synthesised sound effects and a confetti celebration — no media assets needed.
+- Fully playable **without the backend**: the game degrades gracefully when the
+  API is down.
+- Keyboard accessible end to end and safe against XSS.
+
+### My role
+
+I designed and built the **entire project end to end**, on my own:
+
+- **Game design** — the rules, the three difficulty tiers and the score formula
+  (perfect-play bonus, move penalty, time factor, per-difficulty multiplier).
+- **Backend** — the Express API, the SQLite schema, input validation and the
+  anti-cheat rules that keep the leaderboard honest, rate limiting and the
+  security headers.
+- **Frontend** — the screens, the 3D card-flip animation, the timer, the sound
+  engine, the confetti canvas, the accessibility layer and the responsive,
+  reduced-motion-aware design.
+- **Quality** — the 62 automated checks, the ESLint setup and the CI pipeline.
+
+### Tools & technologies used
+
+| Layer | Tool |
+| --- | --- |
+| Language | JavaScript (ES2023), HTML5, CSS3 |
+| Runtime | Node.js ≥ 18 (developed on Node 25) |
+| Server | Express 4, `cors`, `express-rate-limit` |
+| Database | SQLite via `better-sqlite3` (prepared statements) |
+| Frontend | Vanilla JavaScript — no framework, no bundler, no build step |
+| Audio | Web Audio API (synthesised sound effects) |
+| Graphics | CSS 3D transforms, HTML Canvas (confetti) |
+| Testing | Node built-in test runner style scripts + Chrome DevTools Protocol (headless Chrome) |
+| Linting | ESLint 10 (flat config, separate Node and browser environments) |
+| CI/CD | GitHub Actions, Dependabot |
+| Tooling | Git, npm, `.editorconfig`, `.gitattributes` |
+
+---
+
 ## Quick start
 
 ```bash
@@ -40,6 +108,7 @@ Useful commands:
 | `npm run test:browser` | End-to-end frontend test in headless Chrome (CDP) |
 | `npm run test:resilience` | Keyboard play + "API is down" behaviour, headless Chrome |
 | `npm run test:all` | Lint + all three suites (the server must be running) |
+| `node scripts/record-demo.js` | Re-record the gameplay demo into `docs/` (needs Chrome + ffmpeg) |
 | `PORT=4000 npm start` | Start on a different port |
 
 The SQLite database is created automatically at `backend/data/memory.db` on first run.
@@ -89,6 +158,9 @@ memory-game/
 │   │   ├── scores.js      # POST /api/scores, GET /api/scores, GET /api/scores/config
 │   │   └── stats.js       # GET /api/stats
 │   └── data/              # SQLite file lives here (git-ignored)
+├── docs/
+│   ├── demo.mp4             # Screen recording of a full game
+│   └── demo.gif             # The same recording as a GIF
 ├── frontend/
 │   ├── index.html         # Start / game / win screens, leaderboard, HUD
 │   ├── style.css          # Dark theme, 3D card flip, glow & shake animations
@@ -98,7 +170,8 @@ memory-game/
 ├── scripts/
 │   ├── test-api.js        # API smoke test (valid + invalid requests)
 │   ├── browser-test.js    # End-to-end frontend test (headless Chrome, CDP)
-│   └── resilience-test.js # Keyboard play + "API is down" behaviour
+│   ├── resilience-test.js # Keyboard play + "API is down" behaviour
+│   └── record-demo.js     # Records the gameplay demo (Chrome + ffmpeg)
 ├── eslint.config.mjs     # ESLint 10 flat config (Node + browser environments)
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
