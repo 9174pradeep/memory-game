@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "memory-game",
   "version": "1.0.0",
   "private": true,
@@ -24,12 +24,12 @@
   "author": "Prathamesh Kalange <kalange1302@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/memory-game.git"
+    "url": "git+https://github.com/9174pradeep/memory-game.git"
   },
   "bugs": {
-    "url": "https://github.com/OWNER/memory-game/issues"
+    "url": "https://github.com/9174pradeep/memory-game/issues"
   },
-  "homepage": "https://github.com/OWNER/memory-game#readme",
+  "homepage": "https://github.com/9174pradeep/memory-game#readme",
   "license": "MIT",
   "engines": {
     "node": ">=18"

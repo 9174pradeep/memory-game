@@ -1,7 +1,7 @@
-# Memory Card Match
+﻿# Memory Card Match
 
-![CI](https://github.com/OWNER/memory-game/actions/workflows/ci.yml/badge.svg)
-![Release](https://img.shields.io/github/v/release/OWNER/memory-game?label=release)
+![CI](https://github.com/9174pradeep/memory-game/actions/workflows/ci.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/9174pradeep/memory-game?label=release)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-5FA04E)
 ![ESLint](https://img.shields.io/badge/lint-eslint%2010-4B32C3)
@@ -9,9 +9,9 @@
 
 A complete, full-stack **Memory Card Match** game:
 
-- **Frontend** – plain HTML + CSS + vanilla JavaScript (no frameworks, no build step)
-- **Backend** – Node.js + Express REST API
-- **Database** – SQLite via `better-sqlite3`
+- **Frontend** â€“ plain HTML + CSS + vanilla JavaScript (no frameworks, no build step)
+- **Backend** â€“ Node.js + Express REST API
+- **Database** â€“ SQLite via `better-sqlite3`
 
 Flip two cards at a time. Matching pairs stay open, mismatches flip back.
 Three difficulties, a timer, a move counter, personal bests and an online leaderboard.
@@ -22,12 +22,12 @@ Three difficulties, a timer, a move counter, personal bests and an online leader
 
 | | |
 | --- | --- |
-| **Project** | Memory Card Match — a full-stack card matching game with a leaderboard |
+| **Project** | Memory Card Match â€” a full-stack card matching game with a leaderboard |
 | **Playable game** | Run `npm install && npm start`, then open <http://localhost:3000> |
-| **Repository** | <https://github.com/OWNER/memory-game> |
-| **Demo video** | [`docs/demo.mp4`](docs/demo.mp4) — 25 second screen recording of a full game (H.264, 960×600) |
-| **Demo animation** | [`docs/demo.gif`](docs/demo.gif) — the same recording as a lightweight GIF |
-| **Live demo** | <https://OWNER.github.io/memory-game/> (if published) |
+| **Repository** | <https://github.com/9174pradeep/memory-game> |
+| **Demo video** | [`docs/demo.mp4`](docs/demo.mp4) â€” 25 second screen recording of a full game (H.264, 960Ã—600) |
+| **Demo animation** | [`docs/demo.gif`](docs/demo.gif) â€” the same recording as a lightweight GIF |
+| **Live demo** | <https://9174pradeep.github.io/memory-game/> (if published) |
 
 ### Demo
 
@@ -37,19 +37,19 @@ The recording shows a complete Medium game: the name and difficulty are filled
 in, all 16 cards are revealed, every pair is matched, the win screen appears
 with the score, and the score is saved to the leaderboard.
 
-> The demo is generated automatically — `npm start` in one terminal, then
+> The demo is generated automatically â€” `npm start` in one terminal, then
 > `node scripts/record-demo.js` (needs Chrome and ffmpeg) re-records
 > `docs/demo.mp4` and `docs/demo.gif`.
 
 ### What it does
 
-- Three difficulties — Easy (4×3), Medium (4×4), Hard (6×4) — with a live timer,
+- Three difficulties â€” Easy (4Ã—3), Medium (4Ã—4), Hard (6Ã—4) â€” with a live timer,
   move counter, pause and restart.
 - Server-side scoring: fewer moves and less time always mean a higher score, and
   harder difficulties are worth more.
 - An online leaderboard (top 10 per difficulty) plus per-difficulty personal
   bests stored in the browser.
-- Synthesised sound effects and a confetti celebration — no media assets needed.
+- Synthesised sound effects and a confetti celebration â€” no media assets needed.
 - Fully playable **without the backend**: the game degrades gracefully when the
   API is down.
 - Keyboard accessible end to end and safe against XSS.
@@ -58,25 +58,25 @@ with the score, and the score is saved to the leaderboard.
 
 I designed and built the **entire project end to end**, on my own:
 
-- **Game design** — the rules, the three difficulty tiers and the score formula
+- **Game design** â€” the rules, the three difficulty tiers and the score formula
   (perfect-play bonus, move penalty, time factor, per-difficulty multiplier).
-- **Backend** — the Express API, the SQLite schema, input validation and the
+- **Backend** â€” the Express API, the SQLite schema, input validation and the
   anti-cheat rules that keep the leaderboard honest, rate limiting and the
   security headers.
-- **Frontend** — the screens, the 3D card-flip animation, the timer, the sound
+- **Frontend** â€” the screens, the 3D card-flip animation, the timer, the sound
   engine, the confetti canvas, the accessibility layer and the responsive,
   reduced-motion-aware design.
-- **Quality** — the 62 automated checks, the ESLint setup and the CI pipeline.
+- **Quality** â€” the 62 automated checks, the ESLint setup and the CI pipeline.
 
 ### Tools & technologies used
 
 | Layer | Tool |
 | --- | --- |
 | Language | JavaScript (ES2023), HTML5, CSS3 |
-| Runtime | Node.js ≥ 18 (developed on Node 25) |
+| Runtime | Node.js â‰¥ 18 (developed on Node 25) |
 | Server | Express 4, `cors`, `express-rate-limit` |
 | Database | SQLite via `better-sqlite3` (prepared statements) |
-| Frontend | Vanilla JavaScript — no framework, no bundler, no build step |
+| Frontend | Vanilla JavaScript â€” no framework, no bundler, no build step |
 | Audio | Web Audio API (synthesised sound effects) |
 | Graphics | CSS 3D transforms, HTML Canvas (confetti) |
 | Testing | Node built-in test runner style scripts + Chrome DevTools Protocol (headless Chrome) |
@@ -117,17 +117,17 @@ The SQLite database is created automatically at `backend/data/memory.db` on firs
 
 ### What the tests cover
 
-`npm test` — every endpoint with a valid **and** an invalid payload: missing
+`npm test` â€” every endpoint with a valid **and** an invalid payload: missing
 name, 16-character name, unknown difficulty, impossible moves, absurd move
 counts, negative/implausible durations, non-numeric fields, malformed JSON,
 missing query parameter, unknown API route, and a client-supplied `score`
 that must be ignored.
 
-`npm run test:browser` — drives the real page in headless Chrome: form
+`npm run test:browser` â€” drives the real page in headless Chrome: form
 validation, board rendering, move counting, match/mismatch behaviour, the
 pause overlay, the win screen and saving a score.
 
-`npm run test:resilience` — verifies **Tab/Enter/Space** keyboard play and
+`npm run test:resilience` â€” verifies **Tab/Enter/Space** keyboard play and
 that the game stays fully playable when every `/api/*` request is blocked.
 
 The browser tests need Chrome, Chromium or Edge. They look for a browser on
@@ -142,44 +142,44 @@ skipped instead of failing.
 
 ```
 memory-game/
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml           # Lint + API + browser tests on Node 18/20/22
-│   │   └── release.yml      # Tag-based GitHub release
-│   ├── ISSUE_TEMPLATE/      # Bug report, feature request, config
-│   ├── dependabot.yml       # npm + GitHub Actions updates
-│   └── PULL_REQUEST_TEMPLATE.md
-├── backend/
-│   ├── server.js          # Express app: middleware, routes, static hosting, errors
-│   ├── db.js              # SQLite connection, schema, queries
-│   ├── scoring.js         # The score formula (server-side, single source of truth)
-│   ├── validate.js        # Input validation + anti-cheat rules
-│   ├── routes/
-│   │   ├── scores.js      # POST /api/scores, GET /api/scores, GET /api/scores/config
-│   │   └── stats.js       # GET /api/stats
-│   └── data/              # SQLite file lives here (git-ignored)
-├── docs/
-│   ├── demo.mp4             # Screen recording of a full game
-│   └── demo.gif             # The same recording as a GIF
-├── frontend/
-│   ├── index.html         # Start / game / win screens, leaderboard, HUD
-│   ├── style.css          # Dark theme, 3D card flip, glow & shake animations
-│   ├── game.js            # Game logic, timer, scoring preview, leaderboard, a11y
-│   ├── sound.js           # Web Audio sound effects (no audio files needed)
-│   └── confetti.js        # Canvas celebration for the win screen
-├── scripts/
-│   ├── test-api.js        # API smoke test (valid + invalid requests)
-│   ├── browser-test.js    # End-to-end frontend test (headless Chrome, CDP)
-│   ├── resilience-test.js # Keyboard play + "API is down" behaviour
-│   └── record-demo.js     # Records the gameplay demo (Chrome + ffmpeg)
-├── eslint.config.mjs     # ESLint 10 flat config (Node + browser environments)
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── SECURITY.md
-├── package.json
-├── README.md
-└── .gitignore
+â”œâ”€â”€ .github/
+â”‚   â”œâ”€â”€ workflows/
+â”‚   â”‚   â”œâ”€â”€ ci.yml           # Lint + API + browser tests on Node 18/20/22
+â”‚   â”‚   â””â”€â”€ release.yml      # Tag-based GitHub release
+â”‚   â”œâ”€â”€ ISSUE_TEMPLATE/      # Bug report, feature request, config
+â”‚   â”œâ”€â”€ dependabot.yml       # npm + GitHub Actions updates
+â”‚   â””â”€â”€ PULL_REQUEST_TEMPLATE.md
+â”œâ”€â”€ backend/
+â”‚   â”œâ”€â”€ server.js          # Express app: middleware, routes, static hosting, errors
+â”‚   â”œâ”€â”€ db.js              # SQLite connection, schema, queries
+â”‚   â”œâ”€â”€ scoring.js         # The score formula (server-side, single source of truth)
+â”‚   â”œâ”€â”€ validate.js        # Input validation + anti-cheat rules
+â”‚   â”œâ”€â”€ routes/
+â”‚   â”‚   â”œâ”€â”€ scores.js      # POST /api/scores, GET /api/scores, GET /api/scores/config
+â”‚   â”‚   â””â”€â”€ stats.js       # GET /api/stats
+â”‚   â””â”€â”€ data/              # SQLite file lives here (git-ignored)
+â”œâ”€â”€ docs/
+â”‚   â”œâ”€â”€ demo.mp4             # Screen recording of a full game
+â”‚   â””â”€â”€ demo.gif             # The same recording as a GIF
+â”œâ”€â”€ frontend/
+â”‚   â”œâ”€â”€ index.html         # Start / game / win screens, leaderboard, HUD
+â”‚   â”œâ”€â”€ style.css          # Dark theme, 3D card flip, glow & shake animations
+â”‚   â”œâ”€â”€ game.js            # Game logic, timer, scoring preview, leaderboard, a11y
+â”‚   â”œâ”€â”€ sound.js           # Web Audio sound effects (no audio files needed)
+â”‚   â””â”€â”€ confetti.js        # Canvas celebration for the win screen
+â”œâ”€â”€ scripts/
+â”‚   â”œâ”€â”€ test-api.js        # API smoke test (valid + invalid requests)
+â”‚   â”œâ”€â”€ browser-test.js    # End-to-end frontend test (headless Chrome, CDP)
+â”‚   â”œâ”€â”€ resilience-test.js # Keyboard play + "API is down" behaviour
+â”‚   â””â”€â”€ record-demo.js     # Records the gameplay demo (Chrome + ffmpeg)
+â”œâ”€â”€ eslint.config.mjs     # ESLint 10 flat config (Node + browser environments)
+â”œâ”€â”€ CHANGELOG.md
+â”œâ”€â”€ CONTRIBUTING.md
+â”œâ”€â”€ LICENSE
+â”œâ”€â”€ SECURITY.md
+â”œâ”€â”€ package.json
+â”œâ”€â”€ README.md
+â””â”€â”€ .gitignore
 ```
 
 ---
@@ -188,11 +188,11 @@ memory-game/
 
 | Difficulty | Board | Pairs | Minimum possible moves |
 | --- | --- | --- | --- |
-| Easy | 4 × 3 | 6 | 6 |
-| Medium | 4 × 4 | 8 | 8 |
-| Hard | 6 × 4 | 12 | 12 |
+| Easy | 4 Ã— 3 | 6 | 6 |
+| Medium | 4 Ã— 4 | 8 | 8 |
+| Hard | 6 Ã— 4 | 12 | 12 |
 
-- Card faces: 🍎 🐶 🚀 ⚽ 🎸 🌈 🍕 🦋 🔥 🎲 🌙 🍩
+- Card faces: ðŸŽ ðŸ¶ ðŸš€ âš½ ðŸŽ¸ ðŸŒˆ ðŸ• ðŸ¦‹ ðŸ”¥ ðŸŽ² ðŸŒ™ ðŸ©
 - A **move** is one pair of cards being flipped (the second card of a turn).
 - Matched pairs stay face-up and glow green.
 - Mismatched pairs shake gently and flip back down.
@@ -203,9 +203,9 @@ memory-game/
 ### Sound & celebration
 
 - Every event has a short synthesised sound effect (card flip, match, mismatch,
-  win fanfare, error buzz). They are generated with the **Web Audio API** —
+  win fanfare, error buzz). They are generated with the **Web Audio API** â€”
   there are no audio files to download, so they work offline too.
-- The 🔊 button in the header mutes and unmutes everything. The choice is
+- The ðŸ”Š button in the header mutes and unmutes everything. The choice is
   remembered in `localStorage` and survives a reload.
 - Winning fires a canvas **confetti** celebration that never blocks clicks
   and is skipped (or heavily reduced) for users who enabled
@@ -215,7 +215,7 @@ memory-game/
 
 ## Scoring formula
 
-The score is **always computed by the server**. The client never sends a score —
+The score is **always computed by the server**. The client never sends a score â€”
 the API payload only contains `name`, `difficulty`, `moves` and `timeSeconds`.
 
 Defined in `backend/scoring.js`:
@@ -263,10 +263,10 @@ Body:
 { "name": "Ada", "difficulty": "easy", "moves": 9, "timeSeconds": 42 }
 ```
 
-- `name` — string, 1–15 characters (control characters are stripped)
-- `difficulty` — `easy` | `medium` | `hard`
-- `moves` — integer ≥ the number of pairs (anti-cheat) and ≤ `pairs × 4`
-- `timeSeconds` — integer, 0 … 7200
+- `name` â€” string, 1â€“15 characters (control characters are stripped)
+- `difficulty` â€” `easy` | `medium` | `hard`
+- `moves` â€” integer â‰¥ the number of pairs (anti-cheat) and â‰¤ `pairs Ã— 4`
+- `timeSeconds` â€” integer, 0 â€¦ 7200
 
 `201 Created`:
 
@@ -280,7 +280,7 @@ Body:
 Errors: `400` invalid/impossible payload, `429` rate limit exceeded.
 
 **Rate limit:** 30 score submissions per minute per IP (`express-rate-limit`).
-Only `POST /api/scores` is limited — reading the leaderboard never is.
+Only `POST /api/scores` is limited â€” reading the leaderboard never is.
 
 ### `GET /api/scores?difficulty=easy`
 
@@ -308,11 +308,11 @@ the score preview.
 
 The server never trusts the client:
 
-1. **The score is computed server-side** — the request body cannot contain one.
-2. **Impossible move counts are rejected** — fewer moves than pairs is
+1. **The score is computed server-side** â€” the request body cannot contain one.
+2. **Impossible move counts are rejected** â€” fewer moves than pairs is
    physically impossible, and absurdly high counts are refused as well.
 3. **Implausible durations are rejected** (negative or > 2 hours).
-4. **Names are sanitised** — trimmed, control characters removed, max 15 chars.
+4. **Names are sanitised** â€” trimmed, control characters removed, max 15 chars.
 5. **Rate limiting** protects the leaderboard from spam.
 6. **Payload size is capped** (`16kb`) and malformed JSON returns a clean `400`.
 
@@ -321,11 +321,11 @@ The server never trusts the client:
 ## Accessibility & UX
 
 - Every card is a real `<button>`: **Tab** to move, **Enter** or **Space** to flip.
-- The leaderboard tabs follow the WAI-ARIA tabs pattern (**←/→** to switch).
+- The leaderboard tabs follow the WAI-ARIA tabs pattern (**â†/â†’** to switch).
 - Focus is moved to the board when a game starts and to the *Save Score*
   button on the win screen.
 - Live regions (`aria-live`) announce leaderboard and save-status updates.
-- Player names are rendered with `textContent` only — **never** `innerHTML` —
+- Player names are rendered with `textContent` only â€” **never** `innerHTML` â€”
   so a hostile name can never inject markup (**XSS-safe**).
 - Responsive from ~320 px phones to wide desktops; honours
   `prefers-reduced-motion`.
@@ -337,7 +337,7 @@ The server never trusts the client:
 The game is fully playable **without the backend**:
 
 - If the API is down, the leaderboard shows a friendly message, the stats bar
-  hides itself, and *Save Score* reports the error — but the game itself,
+  hides itself, and *Save Score* reports the error â€” but the game itself,
   the timer, the matching logic and the personal best keep working.
 - If the frontend is opened directly from disk (`file://`), the API calls
   automatically fall back to `http://localhost:3000`.
@@ -352,7 +352,7 @@ The server sends a strict set of security headers on every response
 The score is always computed on the server, inputs are validated and
 sanitised, and all SQL statements are parameterised.
 
-Please **do not** open a public issue for a security problem — report it
+Please **do not** open a public issue for a security problem â€” report it
 privately as described in [SECURITY.md](SECURITY.md).
 
 ---
@@ -360,7 +360,7 @@ privately as described in [SECURITY.md](SECURITY.md).
 ## Contributing
 
 Bug reports, ideas and pull requests are welcome. Please read
-[CONTRIBUTING.md](CONTRIBUTING.md) first — it covers the code style, the commit
+[CONTRIBUTING.md](CONTRIBUTING.md) first â€” it covers the code style, the commit
 convention, how to add a new difficulty and how to run the test suite.
 
 ## Changelog
@@ -371,5 +371,5 @@ Notable changes are listed in [CHANGELOG.md](CHANGELOG.md), which follows
 
 ## License
 
-Released under the [MIT License](LICENSE). © 2026 Prathamesh Kalange.
+Released under the [MIT License](LICENSE). Â© 2026 Prathamesh Kalange.
 
