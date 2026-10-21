@@ -1,4 +1,4 @@
-﻿# Memory Card Match
+# Memory Card Match
 
 ![CI](https://github.com/9174pradeep/memory-game/actions/workflows/ci.yml/badge.svg)
 ![Release](https://img.shields.io/github/v/release/9174pradeep/memory-game?label=release)
