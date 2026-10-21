@@ -1,0 +1,32 @@
+# Normalise line endings: store LF in the repository, check out the native
+# line ending of each platform.
+* text=auto eol=lf
+
+# Files that must keep Windows line endings to stay executable.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets must never be touched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.pdf binary
+*.zip binary
+
+# SQLite databases are binary.
+*.db binary
+*.db-journal binary
+*.db-wal binary
+*.db-shm binary
+*.sqlite binary

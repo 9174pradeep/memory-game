@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Memory Card Match - a fast, modern card matching game with an online leaderboard." />
+    <meta name="theme-color" content="#0f1220" />
+    <title>Memory Card Match</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127183;</text></svg>" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ============================ HEADER ============================ -->
+      <header class="app__header">
+        <button
+          id="btn-sound"
+          class="icon-btn"
+          type="button"
+          aria-pressed="true"
+          title="Turn sound effects on or off"
+        >
+          <span id="sound-icon" aria-hidden="true">🔊</span>
+          <span class="visually-hidden">Sound effects</span>
+        </button>
+        <h1 class="app__title">
+          <span class="app__logo" aria-hidden="true">🃏</span>
+          Memory Card Match
+        </h1>
+        <p class="app__tagline">Flip two cards. Match the pairs. Beat the clock.</p>
+      </header>
+
+      <!-- ========================== START SCREEN ========================= -->
+      <section id="screen-start" class="screen screen--active" aria-labelledby="start-heading">
+        <div class="panel">
+          <h2 id="start-heading" class="panel__title">Ready to play?</h2>
+
+          <form id="start-form" class="form" novalidate>
+            <div class="form__row">
+              <label class="label" for="player-name">Your name</label>
+              <input
+                id="player-name"
+                name="name"
+                type="text"
+                class="input"
+                maxlength="15"
+                autocomplete="nickname"
+                placeholder="Enter your name"
+                aria-describedby="name-hint"
+                required
+              />
+              <p id="name-hint" class="hint">1&ndash;15 characters. Shown on the leaderboard.</p>
+              <p id="name-error" class="error" role="alert" hidden></p>
+            </div>
+
+            <fieldset class="form__row">
+              <legend class="label">Difficulty</legend>
+              <div class="difficulty" role="radiogroup" aria-label="Difficulty">
+                <label class="difficulty__option">
+                  <input type="radio" name="difficulty" value="easy" checked />
+                  <span class="difficulty__card">
+                    <span class="difficulty__name">Easy</span>
+                    <span class="difficulty__meta">4 &times; 3 &middot; 6 pairs</span>
+                  </span>
+                </label>
+                <label class="difficulty__option">
+                  <input type="radio" name="difficulty" value="medium" />
+                  <span class="difficulty__card">
+                    <span class="difficulty__name">Medium</span>
+                    <span class="difficulty__meta">4 &times; 4 &middot; 8 pairs</span>
+                  </span>
+                </label>
+                <label class="difficulty__option">
+                  <input type="radio" name="difficulty" value="hard" />
+                  <span class="difficulty__card">
+                    <span class="difficulty__name">Hard</span>
+                    <span class="difficulty__meta">6 &times; 4 &middot; 12 pairs</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn--primary btn--block">Start game</button>
+          </form>
+        </div>
+
+        <!-- --------------------------- LEADERBOARD --------------------------- -->
+        <div class="panel">
+          <h2 class="panel__title">Leaderboard</h2>
+
+          <div class="tabs" role="tablist" aria-label="Leaderboard difficulty">
+            <button class="tab is-active" role="tab" id="tab-easy" aria-selected="true" aria-controls="leaderboard-list" data-difficulty="easy" type="button">Easy</button>
+            <button class="tab" role="tab" id="tab-medium" aria-selected="false" aria-controls="leaderboard-list" data-difficulty="medium" type="button">Medium</button>
+            <button class="tab" role="tab" id="tab-hard" aria-selected="false" aria-controls="leaderboard-list" data-difficulty="hard" type="button">Hard</button>
+          </div>
+
+          <div id="leaderboard-list" class="leaderboard" role="tabpanel" aria-labelledby="tab-easy" aria-live="polite">
+            <p class="muted">Loading leaderboard&hellip;</p>
+          </div>
+
+          <div class="stats" id="stats-bar" hidden>
+            <div class="stats__item">
+              <span class="stats__label">Games played</span>
+              <span class="stats__value" id="stat-total">0</span>
+            </div>
+            <div class="stats__item">
+              <span class="stats__label">Average score</span>
+              <span class="stats__value" id="stat-average">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== GAME SCREEN ========================= -->
+      <section id="screen-game" class="screen" aria-labelledby="game-heading" hidden>
+        <h2 id="game-heading" class="visually-hidden">Game board</h2>
+
+        <div class="gamebar">
+          <div class="gamebar__stats">
+            <div class="stat">
+              <span class="stat__label">Time</span>
+              <span class="stat__value" id="hud-time">00:00</span>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Moves</span>
+              <span class="stat__value" id="hud-moves">0</span>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Pairs</span>
+              <span class="stat__value" id="hud-pairs">0/0</span>
+            </div>
+            <div class="stat stat--best">
+              <span class="stat__label">Personal best</span>
+              <span class="stat__value" id="hud-best">-</span>
+            </div>
+          </div>
+          <div class="gamebar__actions">
+            <button id="btn-pause" class="btn btn--ghost" type="button">Pause</button>
+            <button id="btn-restart" class="btn btn--ghost" type="button">Restart</button>
+          </div>
+        </div>
+
+        <div class="board-wrap">
+          <div id="board" class="board" role="group" aria-label="Memory card board"></div>
+
+          <div id="pause-overlay" class="overlay" hidden>
+            <div class="overlay__box">
+              <h3 class="overlay__title">Paused</h3>
+              <p class="overlay__text">Take a breath. The timer is stopped.</p>
+              <button id="btn-resume" class="btn btn--primary" type="button">Resume</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ WIN SCREEN ========================== -->
+      <section id="screen-win" class="screen" aria-labelledby="win-heading" hidden>
+        <div class="panel panel--win">
+          <div class="win__badge" aria-hidden="true">🏆</div>
+          <h2 id="win-heading" class="panel__title">You won!</h2>
+          <p class="win__sub" id="win-sub">Great memory.</p>
+
+          <dl class="results">
+            <div class="results__item">
+              <dt>Score</dt>
+              <dd id="win-score">-</dd>
+            </div>
+            <div class="results__item">
+              <dt>Moves</dt>
+              <dd id="win-moves">0</dd>
+            </div>
+            <div class="results__item">
+              <dt>Time</dt>
+              <dd id="win-time">00:00</dd>
+            </div>
+            <div class="results__item">
+              <dt>Personal best</dt>
+              <dd id="win-best">-</dd>
+            </div>
+          </dl>
+
+          <p class="score-note" id="score-note">
+            Score preview uses the server formula; saving stores the authoritative value.
+          </p>
+
+          <div class="win__actions">
+            <button id="btn-save" class="btn btn--primary" type="button">Save Score</button>
+            <button id="btn-play-again" class="btn btn--ghost" type="button">Play again</button>
+            <button id="btn-home" class="btn btn--ghost" type="button">Home</button>
+          </div>
+
+          <p class="status" id="save-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <footer class="app__footer">
+        <p>Built with vanilla JS, Express &amp; SQLite. Your best scores are stored in this browser.</p>
+      </footer>
+    </div>
+
+    <script src="sound.js"></script>
+    <script src="confetti.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

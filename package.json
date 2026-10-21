@@ -1,0 +1,48 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Memory Card Match - full-stack card matching game (vanilla JS frontend, Express + SQLite backend)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "node scripts/test-api.js",
+    "test:api": "node scripts/test-api.js",
+    "test:browser": "node scripts/browser-test.js",
+    "test:resilience": "node scripts/resilience-test.js",
+    "test:all": "npm run lint && npm run test:api && npm run test:browser && npm run test:resilience"
+  },
+  "keywords": [
+    "memory",
+    "game",
+    "express",
+    "sqlite"
+  ],
+  "author": "Prathamesh Kalange <kalange1302@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/memory-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OWNER/memory-game/issues"
+  },
+  "homepage": "https://github.com/OWNER/memory-game#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^16.5.0"
+  }
+}
