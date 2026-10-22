@@ -32,7 +32,7 @@
   "homepage": "https://github.com/9174pradeep/memory-game#readme",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
