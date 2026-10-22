@@ -371,5 +371,5 @@ Notable changes are listed in [CHANGELOG.md](CHANGELOG.md), which follows
 
 ## License
 
-Released under the [MIT License](LICENSE). © 2026 Prathamesh Kalange.
+Released under the [MIT License](LICENSE). © 2026 Pradeep rai
 
