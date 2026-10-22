@@ -131,8 +131,13 @@ app.use('/api', (req, res) => {
 });
 
 // Any other route -> serve the single page app (index.html).
-app.get('*', (req, res) => {
-  res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
+// app.use() is used instead of app.get('*') because Express 5 (path-to-regexp
+// v8) no longer accepts a bare "*" as a route pattern.
+app.use((req, res, next) => {
+  if (req.method !== 'GET') {
+    return next();
+  }
+  return res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
 });
 
 // ---------------------------------------------------------------------------
