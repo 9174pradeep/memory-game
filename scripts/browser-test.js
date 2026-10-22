@@ -45,6 +45,27 @@ function check(label, ok, extra = '') {
 /** Waits for a number of milliseconds. */
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+/**
+ * Returns the WebSocket implementation to use.
+ *
+ * Node.js only ships a global `WebSocket` from v22 onwards, but the project
+ * supports Node 18+, so the `ws` package is used as a fallback.
+ * @returns {Function}
+ */
+function getWebSocket() {
+  if (typeof globalThis.WebSocket === 'function') {
+    return globalThis.WebSocket;
+  }
+  try {
+    return require('ws');
+  } catch (err) {
+    throw new Error(
+      'No WebSocket implementation found. Use Node.js 22+ or run "npm install" to get the "ws" package.',
+      { cause: err }
+    );
+  }
+}
+
 /** Minimal Chrome DevTools Protocol client over the built-in WebSocket. */
 class Cdp {
   /** @param {string} wsUrl */
@@ -58,7 +79,8 @@ class Cdp {
   /** Connects to the debugger. */
   connect() {
     return new Promise((resolve, reject) => {
-      this.ws = new WebSocket(this.wsUrl);
+      const WebSocketImpl = getWebSocket();
+      this.ws = new WebSocketImpl(this.wsUrl);
       this.ws.addEventListener('open', () => resolve());
       this.ws.addEventListener('error', (event) => reject(new Error(`WebSocket error: ${event.message || 'unknown'}`)));
       this.ws.addEventListener('message', (event) => {
