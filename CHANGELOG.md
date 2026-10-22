@@ -24,11 +24,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   templates, plus GitHub Actions workflows for CI and tagged releases.
 
 ### Changed
+- **Express 5** — the server now runs on Express 5 (`express-rate-limit` 8 as
+  well). The SPA fallback route was changed from `app.get('*')` to
+  `app.use()`, because Express 5 no longer accepts a bare `*` as a route
+  pattern.
 - **Node.js 22 is now the minimum** — Node 18 and 20 are end of life. The CI
   matrix runs on Node 22 and 24.
-- The SPA fallback route uses `app.use()` instead of `app.get('*')`, so the
-  server also works with Express 5 (where a bare `*` is no longer a valid
-  route pattern).
+- The GitHub Actions used by the workflows were bumped to their current major
+  versions (`actions/checkout` v7, `actions/setup-node` v7,
+  `browser-actions/setup-chrome` v2, `softprops/action-gh-release` v3).
 - `frontend/game.js` is now wrapped in an IIFE, so nothing leaks into the
   global scope.
 - The browser test suites now find Chrome, Chromium or Edge on Windows, macOS

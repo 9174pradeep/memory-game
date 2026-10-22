@@ -74,7 +74,7 @@ I designed and built the **entire project end to end**, on my own:
 | --- | --- |
 | Language | JavaScript (ES2023), HTML5, CSS3 |
 | Runtime | Node.js ≥ 22 (developed on Node 25) |
-| Server | Express 4, `cors`, `express-rate-limit` |
+| Server | Express 5, `cors`, `express-rate-limit` |
 | Database | SQLite via `better-sqlite3` (prepared statements) |
 | Frontend | Vanilla JavaScript — no framework, no bundler, no build step |
 | Audio | Web Audio API (synthesised sound effects) |
