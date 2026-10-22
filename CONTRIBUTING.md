@@ -20,7 +20,7 @@ created automatically in `backend/data/` on first run.
 
 ### Using Node version manager
 
-The project ships a `.nvmrc` (Node 20 LTS):
+The project ships a `.nvmrc` (Node 22 LTS):
 
 ```bash
 nvm install && nvm use
@@ -43,8 +43,8 @@ Run the linter before you push:
 npm run lint
 ```
 
-> ESLint 10 needs **Node 20.19 or newer**; the game itself still runs on
-> Node 18. `npm run lint:fix` repairs most issues automatically.
+> The project requires **Node.js 22 or newer** (Node 18 and 20 are end of
+> life). `npm run lint:fix` repairs most issues automatically.
 
 ## Making a change
 

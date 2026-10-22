@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "memory-game",
   "version": "1.0.0",
   "private": true,
@@ -32,7 +32,7 @@
   "homepage": "https://github.com/9174pradeep/memory-game#readme",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
     "better-sqlite3": "^11.10.0",
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.13.0",
-    "globals": "^16.5.0"
+    "globals": "^16.5.0",
+    "ws": "^8.22.0"
   }
 }
